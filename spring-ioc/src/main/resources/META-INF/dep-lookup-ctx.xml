@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="u1" class="com.neo.ioc.overview.entity.User">
+        <property name="name" value="neo"/>
+        <property name="age" value="18"/>
+    </bean>
+
+    <bean id="VIP1" class="com.neo.ioc.overview.entity.SupUser" parent="u1" primary="true">
+        <property name="level" value="1"/>
+    </bean>
+
+    <bean id="objectFactory" class="org.springframework.beans.factory.config.ObjectFactoryCreatingFactoryBean">
+        <!--name: 属性名，value: 属性值-->
+        <property name="targetBeanName" value="u1"/>
+    </bean>
+</beans>

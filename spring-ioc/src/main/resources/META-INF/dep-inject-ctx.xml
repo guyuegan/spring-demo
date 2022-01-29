@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/util https://www.springframework.org/schema/util/spring-util.xsd">
+
+    <!--通过相对目录导入复用-->
+    <import resource="dep-lookup-ctx.xml"/>
+
+    <bean id="newUser" class="com.neo.ioc.overview.entity.User">
+        <property name="name" value="新用户（测试自动绑定）"/>
+        <property name="age" value="10"/>
+    </bean>
+
+    <!--同时开启自动和手动，使用手动配置-->
+
+    <!--自动绑定：autowire；bean顺序：定义次序-->
+    <bean id="userRepo" class="com.neo.ioc.overview.repo.UserRepo" autowire="byType">
+
+        <!--手动配置：硬编码；bean顺序：声明次序-->
+<!--        <property name="users">-->
+<!--            <util:list>-->
+<!--                <ref bean="VIP1"/>-->
+<!--                <ref bean="u1"/>-->
+<!--            </util:list>-->
+<!--        </property>-->
+    </bean>
+</beans>
