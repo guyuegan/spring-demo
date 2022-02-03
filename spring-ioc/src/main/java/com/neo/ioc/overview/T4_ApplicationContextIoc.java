@@ -21,19 +21,23 @@ public class T4_ApplicationContextIoc {
     public static void main(String[] args) {
         // 创建BeanFactory
         AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext();
-        // 将当前类作为配置类
+        // 将当前类作为配置类(Configuration class)  => AnnotatedBeanDefinitionReader
         applicationContext.register(T4_ApplicationContextIoc.class);
-        // AnnotationConfigApplicationContext@5010be6 has not been refreshed yet
+        // (启动上下文)AnnotationConfigApplicationContext@5010be6 has not been refreshed yet
         applicationContext.refresh();
 
         System.out.println(Arrays.toString(applicationContext.getBeanNamesForType(User.class)));
 
         lookupCollectionByType(applicationContext);
+
+        // 关闭上下文
+        applicationContext.close();
     }
 
     /**
      * Configuration problem: @Bean method 'annoUser' must not be private or final; change the method's modifiers to continue
-     * todo 为什么没有@Configuration可以private，并且成功纳入ioc
+     * Q: 为什么没有@Configuration可以private，并且成功纳入ioc
+     * A: 配置类可以不带@Configuration
      */
     @Bean
     public User annoUser() {
