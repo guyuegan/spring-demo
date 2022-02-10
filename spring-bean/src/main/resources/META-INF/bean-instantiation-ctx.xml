@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+  <!-- 静态方法实例化  -->
+  <bean id="userByStaticMethod" class="com.neo.ioc.overview.entity.User" factory-method="createUser"/>
+
+  <!-- 实例（Bean）方法实例化  -->
+  <bean id="userFactory" class="com.neo.bean.definition.factory.DefaultUserFactory"/>
+  <bean id="userByInstanceMethod" factory-bean="userFactory" factory-method="createUser"/>
+
+  <!-- FactoryBean实例化Bean, 神奇：class不是指向最终要实例化的bean,而是FactoryBean  -->
+  <bean id="userByFactoryBean" class="com.neo.bean.definition.factory.UserFactoryBean"/>
+</beans>
